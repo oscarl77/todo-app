@@ -33,4 +33,4 @@ jobs:
       - name: Build with Gradle
         run: |
           cd todo-backend
-          ./gradlew build
+          ./gradlew build -Dspring.profiles.active=test
