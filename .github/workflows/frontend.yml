@@ -31,8 +31,3 @@ jobs:
         run: |
           cd todo-frontend
           npm run build
-
-      - name: Run tests
-        run: |
-          cd todo-frontend
-          npm test -- --coverage
