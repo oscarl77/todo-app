@@ -1,27 +1,44 @@
-.input-container {
+.main-container {
     display: flex;
     flex-direction: column;
-    position: relative;
+    align-items: center;
+    gap: 20px;
 }
 
-.error-message {
-    position: absolute;
-    top: 100px;
-    left: 5px;
-    color: red;
-    font-size: 14px;
+.text-header {
+    color: white;
+    font-size: 48px;
+    font-weight: 640;
 }
 
-.continue {
+.text-container {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    padding: 5px 20px 20px 20px;
+    align-items: center;
+}
+
+p {
+    color: #242424;
+    margin: 10px 5px;
+}
+
+.email {
+    font-weight: 600;
+}
+
+.return-to-login {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 110px;
-    height: 42px;
-    margin-top: 20px;
+    width: 100px;
+    height: 38px;
+    margin: 10px 10px;
     color: white;
     background: dodgerblue;
-    border-radius: 30px;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 20px;
     font-weight: 400;
@@ -30,13 +47,13 @@
     box-shadow 0.3s ease;
 }
 
-.continue:hover {
+.return-to-login:hover {
     background: #187bcd;
     transform: translateY(-4px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.continue:active {
+.return-to-login:active {
     transform: translateY(2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
