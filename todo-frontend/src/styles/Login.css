@@ -38,7 +38,7 @@ input {
     outline: none;
     padding: 20px 25px 20px 20px;
     border: transparent;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 input::placeholder {
@@ -80,7 +80,7 @@ button:focus {
     margin: auto 10px;
     color: white;
     background: dodgerblue;
-    border-radius: 30px;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 20px;
     font-weight: 400;
