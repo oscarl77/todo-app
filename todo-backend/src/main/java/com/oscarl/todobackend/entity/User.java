@@ -1,9 +1,8 @@
 package com.oscarl.todobackend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 /**
  * This class represents a user of the to-do list application.
@@ -13,15 +12,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
+    private boolean isVerified = false;
     private String username;
     private String email;
-    private String hashedPassword;
+    private String password;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
+
+    public boolean getVerified(boolean verified) { return isVerified; }
 
     public Long getId() {
         return id;
@@ -43,12 +44,24 @@ public class User {
         return email;
     }
 
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getHashedPassword() {
-        return hashedPassword;
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Task> setTasks() {
+        return tasks;
+    }
+
+    public void getTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void verify() {
+        isVerified = true;
     }
 
 

@@ -20,7 +20,6 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    // noinspection JSUnusedLocalSymbols
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
@@ -33,7 +32,7 @@ function SignUp() {
      */
     const validateUsername = (value) => {
         setUsername(value)
-        if(/\s/.test(value)) {
+        if(/\s/.test(value) || validator.isEmpty(value)) {
             setUsernameError('Username already used or invalid.')
             return false;
         } else {
@@ -65,7 +64,7 @@ function SignUp() {
      */
     const validatePassword = (value) => {
         setPassword(value);
-        if (value.length > 8) {
+        if (value.length > 7) {
             setPasswordError('')
             return true;
         } else {
@@ -91,15 +90,71 @@ function SignUp() {
     }
 
     /**
+     * Check if all entries are initially valid
+     * @returns {boolean} true if all entries are valid, false otherwise.
+     */
+    const isValidEntries = () => {
+        return validateUsername(username) && validateEmail(email)
+            && validatePassword(password) && validateConfirmPassword(password)
+    }
+
+    /**
+     * Clear user details from memory.
+     */
+    const clearEntries = () => {
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+    }
+
+    const getCsrfToken = () => {
+        return document.cookie.split(';')
+            .find(cookie => cookie.trim().startsWith('XSRF-TOKEN='))
+            ?.split('=')[1];
+    };
+
+    /**
      * Navigates to the email verification page if inputted details are valid.
      */
-    const handleSubmit = () => {
-        if (validateUsername(username)
-            && validateEmail(email)
-            && validatePassword(password)
-            && validateConfirmPassword(confirmPassword)) {
-            navigate('/verification', { state: { email} })
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const csrfToken = getCsrfToken()
+
+        if (!isValidEntries()) {
+            return;
         }
+
+        const response = await fetch("http://localhost:8080/api/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-XSRF-TOKEN": csrfToken
+            },
+            body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    password: password
+                }
+            ),
+            credentials: "include"
+        });
+
+        if (response.ok) {
+            navigate('/verification', { state: { email} })
+            return;
+        }
+        const errorData = await response.text()
+        if (errorData === "Username taken") {
+            setUsernameError("Username taken")
+            return;
+        }
+        if (errorData === "Email taken") {
+            setEmailError("Email taken")
+            return;
+        }
+        clearEntries()
     }
 
     return (
@@ -145,13 +200,14 @@ function SignUp() {
                         type={"password"}
                         id={"confirmPassword"}
                         placeholder={"Confirm Password"}
+                        value={confirmPassword}
                         onChange={(e) => validateConfirmPassword(e.target.value)}
                     />
                     {confirmPasswordError && <span className={"error-message"}>{confirmPasswordError}</span>}
                 </div>
             </form>
             <div className={"submit-container"}>
-                <button className={"continue"} onClick={handleSubmit}>Continue </button>
+                <button className={"continue"} onClick={handleSubmit}>Continue</button>
             </div>
         </div>
     )
