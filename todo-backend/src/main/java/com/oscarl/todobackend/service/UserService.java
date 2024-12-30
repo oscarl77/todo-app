@@ -38,12 +38,9 @@ public class UserService {
     }
 
     public String getPasswordByEmail(String email) {
-        String password = userRepository.findPasswordUsingEmail(email);
-
-        if (password == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return password;
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user.getPassword();
     }
 
     public User getUserByEmail (String email) {

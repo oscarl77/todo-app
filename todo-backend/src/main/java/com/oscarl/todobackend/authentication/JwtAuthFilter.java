@@ -1,5 +1,6 @@
 package com.oscarl.todobackend.authentication;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -16,8 +17,8 @@ import java.security.Key;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.secret-key}")
-    private String SECRET_KEY;
+    Dotenv dotenv = Dotenv.configure().directory("todo-backend").load();
+    private final String SECRET_KEY = dotenv.get("jwtkey");
 
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 

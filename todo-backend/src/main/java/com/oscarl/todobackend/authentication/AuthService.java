@@ -2,6 +2,7 @@ package com.oscarl.todobackend.authentication;
 
 
 import com.oscarl.todobackend.service.UserService;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,6 @@ import java.util.Date;
 @Service
 public class AuthService {
 
-    @Value("${jwt.secret-key}")
-    private String secretKey;
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -28,7 +27,10 @@ public class AuthService {
     public AuthService(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
-        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+
+        Dotenv dotenv = Dotenv.configure().directory("todo-backend").load();
+        String SECRET_KEY = dotenv.get("jwtkey");
+        this.key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
     public boolean isLoginValid(String email, String password) {
