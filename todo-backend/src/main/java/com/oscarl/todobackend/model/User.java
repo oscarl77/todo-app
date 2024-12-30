@@ -1,4 +1,4 @@
-package com.oscarl.todobackend.entity;
+package com.oscarl.todobackend.model;
 
 import jakarta.persistence.*;
 
@@ -21,6 +21,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
 
     public boolean getVerified(boolean verified) { return isVerified; }
 
@@ -52,17 +56,15 @@ public class User {
         return password;
     }
 
-    public List<Task> setTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void getTasks(List<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public void verify() {
-        isVerified = true;
+    public boolean equals(User user) {
+        return this.id == user.getId();
     }
-
-
 }
