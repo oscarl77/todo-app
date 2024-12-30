@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/Login.css'
 
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 function Login() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const handleLogin = async () => {
+        const response = axios.post(email, password)
+
+    }
+
+
     return (
         <div className={"form-container"}>
             <div className={"header"}>Login</div>
@@ -11,8 +23,11 @@ function Login() {
                 <div>
                     <input
                         className={"inputs"}
-                        type={"email"} id={"email"}
+                        type={"email"}
+                        id={"email"}
                         placeholder={"Email"}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div>
@@ -21,6 +36,8 @@ function Login() {
                         type={"password"}
                         id={"password"}
                         placeholder={"Password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
             </form>

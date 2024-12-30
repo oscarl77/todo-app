@@ -33,7 +33,7 @@ function SignUp() {
     const validateUsername = (value) => {
         setUsername(value)
         if(/\s/.test(value) || validator.isEmpty(value)) {
-            setUsernameError('Username already used or invalid.')
+            setUsernameError('Invalid username')
             return false;
         } else {
             setUsernameError('')
@@ -126,7 +126,7 @@ function SignUp() {
             return;
         }
 
-        const response = await fetch("http://localhost:8080/api/users", {
+        const response = await fetch("http://localhost:8080/api/users/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

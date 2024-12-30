@@ -51,14 +51,13 @@ button {
     cursor: pointer;
 }
 
-button:focus {
-    outline: 1px solid #1E90FF;
-    outline-offset: 2px;
-}
-
 .forgot-password {
     color: #797979;
     margin-top: 15px;
+}
+
+.forgot-password:focus {
+    outline: none;
 }
 
 .forgot-password:hover {
@@ -94,6 +93,11 @@ button:focus {
     background: #187bcd;
     transform: translateY(-4px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.submit:focus {
+    outline: 1px solid #1E90FF;
+    outline-offset: 2px;
 }
 
 .submit:active {
