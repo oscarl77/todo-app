@@ -24,9 +24,7 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public Long getId() {
         return id;

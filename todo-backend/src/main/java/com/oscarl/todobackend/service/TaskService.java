@@ -1,5 +1,6 @@
 package com.oscarl.todobackend.service;
 
+import com.oscarl.todobackend.exception.TaskNotFoundException;
 import com.oscarl.todobackend.model.Task;
 import com.oscarl.todobackend.model.User;
 import com.oscarl.todobackend.repository.TaskRepository;
@@ -46,7 +47,7 @@ public class TaskService {
     // Only updated selected task attributes.
     public Task partiallyUpdateTask(Long taskId, Map<String, Object> updates) {
         Task selectedTask = taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskRejectedException("Task not found"));
+                .orElseThrow(TaskNotFoundException::new);
 
         updateTaskAttributes(selectedTask, updates);
         return taskRepository.save(selectedTask);
@@ -99,17 +100,17 @@ public class TaskService {
     private Task getTask(String email, Long taskId) {
         User user = userService.getUserByEmail(email);
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskRejectedException("Task not found"));
+                .orElseThrow(TaskNotFoundException::new);
 
-        if (!task.getUser().equals(user)) {
-            throw new SecurityException("Task does not belong to user");
+        if (task.getUser().equals(user)) {
+            return task;
         }
-        return task;
+        throw new SecurityException("Task does not belong to user");
     }
 
     // Returns the task corresponding to the given id.
     private Task getTask(Long taskId) {
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskRejectedException("Task not found"));
+                .orElseThrow(TaskNotFoundException::new);
     }
 }

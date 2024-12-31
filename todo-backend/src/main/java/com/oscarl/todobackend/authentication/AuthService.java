@@ -6,7 +6,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import java.util.Date;
 
 @Service
 public class AuthService {
-
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -28,8 +26,12 @@ public class AuthService {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
 
-        Dotenv dotenv = Dotenv.configure().directory("todo-backend").load();
+
+        Dotenv dotenv = Dotenv.load();
         String SECRET_KEY = dotenv.get("jwtkey");
+        if (SECRET_KEY == null) {
+            throw new IllegalArgumentException("JWT key not set");
+        }
         this.key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 

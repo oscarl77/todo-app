@@ -28,6 +28,8 @@ public class User {
 
     public boolean getVerified(boolean verified) { return isVerified; }
 
+    public void setId(long id) { this.id = id; }
+
     public Long getId() {
         return id;
     }

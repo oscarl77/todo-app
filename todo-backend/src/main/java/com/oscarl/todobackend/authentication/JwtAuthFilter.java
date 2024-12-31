@@ -17,7 +17,7 @@ import java.security.Key;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    Dotenv dotenv = Dotenv.configure().directory("todo-backend").load();
+    Dotenv dotenv = Dotenv.load();
     private final String SECRET_KEY = dotenv.get("jwtkey");
 
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
