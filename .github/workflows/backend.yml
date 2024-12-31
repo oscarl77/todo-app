@@ -29,3 +29,9 @@ jobs:
         run: |
           cd todo-backend
           ./gradlew build
+
+      - name: Upload checkstyle report
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: build/reports/checkstyle/main.html
