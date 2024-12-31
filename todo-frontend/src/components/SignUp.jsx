@@ -33,7 +33,7 @@ function SignUp() {
     const validateUsername = (value) => {
         setUsername(value)
         if(/\s/.test(value) || validator.isEmpty(value)) {
-            setUsernameError('Username already used or invalid.')
+            setUsernameError('Invalid username')
             return false;
         } else {
             setUsernameError('')

@@ -1,7 +1,7 @@
 package com.oscarl.todobackend.repository;
 
 
-import com.oscarl.todobackend.entity.User;
+import com.oscarl.todobackend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.oscarl.todobackend.controller;
 
-import com.oscarl.todobackend.entity.User;
+import com.oscarl.todobackend.model.User;
 import com.oscarl.todobackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,6 @@ public class UserController {
         }
 
         User createdUser = userService.registerUser(user);
-        System.out.println("USER CREATED: " + createdUser.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 }

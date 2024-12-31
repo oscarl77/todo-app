@@ -1,4 +1,4 @@
-package com.oscarl.todobackend.entity;
+package com.oscarl.todobackend.model;
 
 
 import jakarta.persistence.*;
@@ -18,14 +18,13 @@ public class Task {
     private String description;
     private LocalDate dueDate;
     private String category;
+    private Boolean completed;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public Long getId() {
         return id;
@@ -54,5 +53,13 @@ public class Task {
     public String getCategory() {
         return category;
     }
+
+    public void setCompleted(Boolean completed) { this.completed = completed; }
+
+    public Boolean isCompleted() { return completed; }
+
+    public void setUser(User user) { this.user = user; }
+
+    public User getUser() { return user; }
 }
 
