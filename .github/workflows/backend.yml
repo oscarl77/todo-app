@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: checkstyle-report
-          path: build/reports/checkstyle/main.html
+          path: todo-backend/build/reports/checkstyle/main.html
