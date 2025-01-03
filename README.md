@@ -5,7 +5,6 @@ A simple Todo application that allows users to create, read, update, delete and 
 ## Table of Contents
 1. [Technologies Used](#technologies-used)
 2. [Features](#features)
-3. [Prerequisites](#prerequisites)
 4. [Dependencies](#dependencies)
 
 ## Technologies Used
@@ -23,16 +22,6 @@ A simple Todo application that allows users to create, read, update, delete and 
 - Reminders can be sent to the user's email address
 - User-specific tasks (users can only see and manage their own tasks)
 - Input validation (both client-side and server-side)
-
-## Prerequisites
-
-To run this application, the following tools need to be installed:
-
-- **Java** (JDK 17)
-- **Node.js** (v22.9.0)
-- **MySQL**
-- **Gradle**
-- **Vite**
 
 ## Dependencies
 
