@@ -43,7 +43,6 @@ public class UserServiceTest {
         user.setUsername("testusername");
         user.setPassword("testpassword");
         user.setEmail("testemail@mail.com");
-        user.setVerified(false);
     }
 
     @Test

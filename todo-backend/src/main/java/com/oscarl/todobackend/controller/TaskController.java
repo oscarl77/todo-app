@@ -55,6 +55,4 @@ public class TaskController {
         Task selectedTask = taskService.partiallyUpdateTask(taskId, updates);
         return ResponseEntity.ok(selectedTask);
     }
-
-
 }
