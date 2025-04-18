@@ -1,5 +1,8 @@
 package com.oscarl.todobackend.authentication;
 
+import java.security.Key;
+import java.io.IOException;
+import javax.crypto.SecretKey;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,13 +11,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.crypto.SecretKey;
-import java.io.IOException;
-import java.security.Key;
-
+// TODO: Add docstrings
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     Dotenv dotenv = Dotenv.load();
