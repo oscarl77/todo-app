@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A service class that handles CRUD logic for tasks.
+ */
 @Service
 public class TaskService {
 
@@ -39,16 +42,20 @@ public class TaskService {
     // Update all task attributes.
     public Task updateTask(Long taskId, Task updatedTask) {
         Task selectedTask = getTask(taskId);
-
         updateTaskAttributes(selectedTask, updatedTask);
         return taskRepository.save(selectedTask);
     }
 
-    // Only updated selected task attributes.
+    /**
+     * Update only selected attributes of a task.
+     * @param taskId task id number.
+     * @param updates selected task attributes mapped to the attribute content:
+     *                 - e.g {dueDate: 21/01/2020}
+     * @return the updated task.
+     */
     public Task partiallyUpdateTask(Long taskId, Map<String, Object> updates) {
         Task selectedTask = taskRepository.findById(taskId)
                 .orElseThrow(TaskNotFoundException::new);
-
         updateTaskAttributes(selectedTask, updates);
         return taskRepository.save(selectedTask);
     }
