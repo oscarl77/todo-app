@@ -7,15 +7,13 @@ import '../styles/EmailVerification.css'
 function EmailVerification() {
 
     const location = useLocation();
-    const email = location.state?.email;
+    //const email = location.state?.email;
 
     return (
         <div className={"main-container"}>
-            <div className={"text-header"}>Verify your email address</div>
+            <div className={"text-header"}>Account successfully created.</div>
             <div className={"text-container"}>
-                <p>Please verify your email address by clicking on the link sent to:</p>
-                <p className={"email"}>{email}</p>
-                <p>Once completed, you can login to your account below.</p>
+                <p>You can now return to the login page.</p>
                 <div className={"button-container"}>
                     <Link to={"/"}>
                         <button className={"return-to-login"}>Login</button>
