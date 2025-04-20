@@ -1,6 +1,7 @@
-import Login from "./components/Login.jsx"
-import SignUp from './components/SignUp'
-import EmailVerification from './components/EmailVerification.jsx'
+import Login from "./pages/Login.jsx"
+import SignUp from './pages/SignUp.jsx'
+import EmailVerification from './pages/EmailVerification.jsx'
+import Dashboard from './pages/Dashboard.jsx'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ function App() {
                     <Route path={"/"} element={<Login />} />
                     <Route path={"/signup"} element={<SignUp />} />
                     <Route path={"/verification"} element={<EmailVerification />} />
+                    <Route path={"/dashboard"} element={<Dashboard />} />
                 </Routes>
             </div>
         </Router>

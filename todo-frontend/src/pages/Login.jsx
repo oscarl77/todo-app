@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import '../styles/Login.css'
 
 import { Link } from 'react-router-dom';
-import axios from "axios";
 
 function Login() {
 

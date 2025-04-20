@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     public void addCorsMappings(CorsRegistry registry) {
-        // Allow requests from localhost:3000 (your React app)
+        // Allow requests from localhost:3000
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173")  // React app URL
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                 .allowedHeaders("Content-Type", "Authorization");
     }
 }

@@ -1,8 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import { useNavigate} from "react-router-dom";
 import validator from "validator/es";
-import '../styles/SignUp.css'
+import '../styles/SignUp.css';
 
 /**
  * This component represents the sign-up page
@@ -31,8 +31,10 @@ function SignUp() {
      * @returns {boolean} true if valid, false otherwise.
      */
     const validateUsername = (value) => {
-        setUsername(value)
-        if(/\s/.test(value) || validator.isEmpty(value)) {
+        setUsername(value);
+        // Check if the username entry contains whitespace or is empty
+        const isInvalid = /\s/.test(value) || validator.isEmpty(value)
+        if(isInvalid) {
             setUsernameError('Invalid username')
             return false;
         } else {
@@ -48,7 +50,8 @@ function SignUp() {
      */
     const validateEmail = (value) => {
         setEmail(value);
-        if (validator.isEmail(value)) {
+        const isValid = validator.isEmail(value);
+        if (isValid) {
             setEmailError('')
             return true;
         } else {
@@ -64,7 +67,8 @@ function SignUp() {
      */
     const validatePassword = (value) => {
         setPassword(value);
-        if (value.length > 7) {
+        const isValid = value.length > 7
+        if (isValid) {
             setPasswordError('')
             return true;
         } else {
@@ -79,7 +83,7 @@ function SignUp() {
      * @return {boolean} true if passwords match, false otherwise.
      */
     const validateConfirmPassword = (value) => {
-        setConfirmPassword(value)
+        setConfirmPassword(value);
         if (value === password) {
             setConfirmPasswordError('')
             return true;
@@ -95,17 +99,17 @@ function SignUp() {
      */
     const isValidEntries = () => {
         return validateUsername(username) && validateEmail(email)
-            && validatePassword(password) && validateConfirmPassword(password)
+            && validatePassword(password) && validateConfirmPassword(password);
     }
 
     /**
      * Clear user details from memory.
      */
     const clearEntries = () => {
-        setUsername('')
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
     }
 
     const getCsrfToken = () => {
@@ -118,9 +122,9 @@ function SignUp() {
      * Navigates to the email verification page if inputted details are valid.
      */
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const csrfToken = getCsrfToken()
+        const csrfToken = getCsrfToken();
 
         if (!isValidEntries()) {
             return;
@@ -154,7 +158,7 @@ function SignUp() {
             setEmailError("Email taken")
             return;
         }
-        clearEntries()
+        clearEntries();
     }
 
     return (
@@ -210,7 +214,7 @@ function SignUp() {
                 <button className={"continue"} onClick={handleSubmit}>Continue</button>
             </div>
         </div>
-    )
+    );
 }
 
-export default SignUp
+export default SignUp;

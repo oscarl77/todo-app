@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * A service class that handle user management logic.
+ */
 @Service
 public class UserService {
 
@@ -25,7 +28,6 @@ public class UserService {
     public User registerUser(User user) {
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
-
         return userRepository.save(user);
     }
 
@@ -41,6 +43,12 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
         return user.getPassword();
+    }
+
+    public User getUserById(String id) {
+        long userId = Long.parseLong(id);
+        return userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
     }
 
     public User getUserByEmail (String email) {
